@@ -1,7 +1,6 @@
 # Webtech_Benslimane_Thevin
 Project Group ECE Paris 2020-2021
 
-
 ## Installation
 
 Clone the project and install the dependencies with the following commands in your terminal
