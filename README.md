@@ -23,10 +23,7 @@ npm start
 ## Authors
 
 Y. Benslimane <br>
-youssef.benslimane@edu.ece.fr<br>
-Student at [ECE Paris](https://www.ece.fr)
+youssef.benslimane@edu.ece.fr   Student at [ECE Paris](https://www.ece.fr)
 
 V. J. Thévin <br>
-<a href="victor.thevin@edu.ece.fr "></a><br>
-Student at [ECE Paris](https://www.ece.fr)
-
+victor.thevin@edu.ece.fr    Student at [ECE Paris](https://www.ece.fr)
