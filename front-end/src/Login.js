@@ -139,7 +139,7 @@ export default ({
             redirect_uri: `${config.redirect_uri}`,
             client_secret: 'ZXhhbXBsZS1hcHAtc2VjcmV0',
             code_verifier: `${code_verifier}`,
-            code: ${code},
+            code: `${code}`,
           }))
           console.log("done")
           removeCookie('code_verifier')
