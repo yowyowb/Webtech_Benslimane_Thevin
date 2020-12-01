@@ -17,7 +17,7 @@ const useStyles = (theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     '& > div': {
-      margin: ${theme.spacing(1)},
+      margin: `${theme.spacing(1)}`,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -52,13 +52,13 @@ const Register = ({
   const dex = () => {
     const code_challenge = base64URLEncode(sha256(code_verifier))
     const url = [
-      ${config.authorization_endpoint}?,
-      client_id=${config.client_id}&,
-      scope=${config.scope}&,
-      response_type=code&,
-      redirect_uri=${config.redirect_uri}&,
-      code_challenge=${code_challenge}&,
-      code_challenge_method=S256,
+      `${config.authorization_endpoint}?`,
+      `client_id=${config.client_id}&`,
+      `scope=${config.scope}&`,
+      `response_type=code&`,
+      `redirect_uri=${config.redirect_uri}&`,
+      `code_challenge=${code_challenge}&`,
+      `code_challenge_method=S256`,
     ].join('')
     window.location = url
     console.log("url :" + url)
@@ -135,10 +135,10 @@ export default ({
           const code_verifier = cookies.code_verifier
           const {data: user_tokens} = await axios.post(config.token_endpoint, qs.stringify({
             grant_type: 'authorization_code',
-            client_id: ${config.client_id},
-            redirect_uri: ${config.redirect_uri},
+            client_id: `${config.client_id}`,
+            redirect_uri: `${config.redirect_uri}`,
             client_secret: 'ZXhhbXBsZS1hcHAtc2VjcmV0',
-            code_verifier: ${code_verifier},
+            code_verifier: `${code_verifier}`,
             code: ${code},
           }))
           console.log("done")
@@ -156,4 +156,4 @@ export default ({
     )
   }
 
-}
+} 

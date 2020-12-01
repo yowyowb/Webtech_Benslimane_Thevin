@@ -16,7 +16,7 @@ npm install
 Start the web application:
 
 ```bash
-cd tuto
+cd front-end
 npm start
 ```
 
