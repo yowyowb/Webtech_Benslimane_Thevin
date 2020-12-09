@@ -17,3 +17,7 @@ Run the tests with mocha:
 ```bash
 npm run test
 ```
+
+## Instructions
+
+See "../lab.md" for the lab instructions.
