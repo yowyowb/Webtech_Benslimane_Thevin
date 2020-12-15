@@ -7,11 +7,13 @@
 
 *how to start and use the application, run the tests, ...*
 
-* Clone this repository, from your local machine:
+* Clone the project and install the dependencies with the following commands in your terminal
+
+  ```bash
+  git clone https://github.com/yowyowb/Webtech_Benslimane_Thevin
+  cd Webtech_Benslimane_Thevin
   ```
-  git clone https://github.com/adaltas/ece-2020-fall-webtech-project.git webtech
-  cd webtech
-  ```
+
 * Install [Go](https://golang.org/) and [Dex](https://dexidp.io/docs/getting-started/). For example, on Ubuntu, from your project root directory:   
   ```
   # Install Go
@@ -64,7 +66,11 @@
 
 ## Author
 
-*name, email, ...*
+Y. Benslimane <br>
+youssef.benslimane@edu.ece.fr   Student at [ECE Paris](https://www.ece.fr)
+
+V. J. Thévin <br>
+victor.thevin@edu.ece.fr    Student at [ECE Paris](https://www.ece.fr)
 
 ## Tasks
 
