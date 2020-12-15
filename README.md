@@ -64,7 +64,7 @@
   yarn start
   ```
 
-## Author
+## Authors
 
 Y. Benslimane <br>
 youssef.benslimane@edu.ece.fr   Student at [ECE Paris](https://www.ece.fr)
