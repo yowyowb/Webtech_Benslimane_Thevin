@@ -6,10 +6,10 @@ import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Drawer from '@material-ui/core/Drawer';
 // Local
-import Context from './Context'
+import Context from '../Context'
 import Channels from './Channels'
 import Channel from './Channel'
-import Welcome from './Welcome'
+import Welcome from '../views/Welcome'
 import {
   Route,
   Switch,

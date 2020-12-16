@@ -9,7 +9,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 // Local
 import Form from './channel/Form'
 import List from './channel/List'
-import Context from './Context'
+import Context from '../Context'
 import { useHistory, useParams } from 'react-router-dom'
 
 const useStyles = (theme) => ({

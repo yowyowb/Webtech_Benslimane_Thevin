@@ -2,10 +2,10 @@ import { useContext, useState } from 'react'
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 // Local
-import Oups from './Oups'
-import Footer from './Footer'
-import Header from './Header'
-import Main from './Main'
+import Oups from './views/Oups'
+import Footer from './components/Footer'
+import Header from './components/Header'
+import Main from './components/Main'
 import Login from './Login'
 import Context from './Context'
 // Rooter
