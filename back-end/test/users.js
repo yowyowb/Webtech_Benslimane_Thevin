@@ -1,14 +1,14 @@
 
 const supertest = require('supertest')
-const app = require('../lib/app')
-const db = require('../lib/db')
+const app = require('../src/app')
+const db = require('../src/services/db.js')
 
 describe('users', () => {
-  
+
   beforeEach( async () => {
     await db.admin.clear()
   })
-  
+
   it('list empty', async () => {
     // Return an empty user list by default
     const {body: users} = await supertest(app)
@@ -16,7 +16,7 @@ describe('users', () => {
     .expect(200)
     users.should.eql([])
   })
-  
+
   it('list one element', async () => {
     // Create a user
     await supertest(app)
@@ -31,7 +31,7 @@ describe('users', () => {
       username: 'user_1'
     }])
   })
-  
+
   it('add one element', async () => {
     // Create a user
     const {body: user} = await supertest(app)
@@ -44,7 +44,7 @@ describe('users', () => {
     .get('/users')
     users.length.should.eql(1)
   })
-  
+
   it('get user', async () => {
     // Create a user
     const {body: user1} = await supertest(app)
@@ -56,5 +56,5 @@ describe('users', () => {
     .expect(200)
     user.username.should.eql('user_1')
   })
-  
+
 })
