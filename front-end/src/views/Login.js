@@ -9,7 +9,7 @@ import { jsx } from '@emotion/core'
 import { useTheme } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link'
 // Local
-import Context from './Context'
+import Context from '../Context'
 import {
   useHistory
 } from "react-router-dom";
