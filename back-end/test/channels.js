@@ -1,16 +1,16 @@
 
 const supertest = require('supertest')
-const app = require('../lib/app')
-const db = require('../lib/db')
+const app = require('../src/app')
+const db = require('../src/services/db.js')
 
 describe('channels', () => {
-  
+
   beforeEach( async () => {
     await db.admin.clear()
   })
-  
+
   describe( 'list', () => {
-  
+
     it('list empty', async () => {
       // Return an empty channel list by default
       const {body: channels} = await supertest(app)
@@ -18,7 +18,7 @@ describe('channels', () => {
       .expect(200)
       channels.should.eql([])
     })
-    
+
     it('list one element', async () => {
       // Create a channel
       await supertest(app)
@@ -33,9 +33,9 @@ describe('channels', () => {
         name: 'channel 1'
       }])
     })
-    
+
   })
-  
+
   it('create one element', async () => {
     // Create a channel
     const {body: channel} = await supertest(app)
@@ -52,7 +52,7 @@ describe('channels', () => {
     .get('/channels')
     channels.length.should.eql(1)
   })
-  
+
   it('get channel', async () => {
     // Create a channel
     const {body: channel1} = await supertest(app)
@@ -64,5 +64,5 @@ describe('channels', () => {
     .expect(200)
     channel.name.should.eql('channel 1')
   })
-  
+
 })

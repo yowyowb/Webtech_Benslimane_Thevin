@@ -1,15 +1,15 @@
 
 const supertest = require('supertest')
 const microtime = require('microtime')
-const app = require('../lib/app')
-const db = require('../lib/db')
+const app = require('../src/app')
+const db = require('../src/services/db.js')
 
 describe('messages', () => {
-  
+
   beforeEach( async () => {
     await db.admin.clear()
   })
-  
+
   it('list empty', async () => {
     // Create a channel
     const {body: channel} = await supertest(app)
@@ -21,7 +21,7 @@ describe('messages', () => {
     .expect(200)
     messages.should.eql([])
   })
-  
+
   it('list one message', async () => {
     // Create a channel
     const {body: channel} = await supertest(app)
@@ -41,7 +41,7 @@ describe('messages', () => {
       content: 'Hello ECE'
     }])
   })
-  
+
   it('add one element', async () => {
     // Create a channel
     const {body: channel} = await supertest(app)
@@ -62,5 +62,5 @@ describe('messages', () => {
     .get(`/channels/${channel.id}/messages`)
     messages.length.should.eql(1)
   })
-  
+
 })

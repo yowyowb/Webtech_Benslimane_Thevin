@@ -1,7 +1,7 @@
 #!env node
 
 const axios = require('axios')
-const app = require('../lib/app')
+const app = require('../src/app')
 const config = {
   port: 3001
 };
@@ -121,7 +121,7 @@ const config = {
       name: channel.name
     })
     return Promise.all( channel.messages.map( async (message) => {
-      await axios.post(`http://localhost:${config.port}/channels/${id}/messages`, message)
+      // await axios.post(`http://localhost:${config.port}/channels/${id}/messages`, message)
     }))
   }))
   process.exit()
