@@ -1,12 +1,13 @@
 const db = require('../services/db.js')
 const {merge} = require("mixme");
 const {v4: uuid} = require('uuid')
+const {HttpNotFoundError, HttpBadRequestError} = require('../errors')
 
 module.exports = {
 
     async create(user) {
         if (!user.username) { // TODO validation here si le temps
-            throw Error('Invalid user')
+            throw HttpBadRequestError("missing 'username' field");
         }
 
         user.id = uuid()
@@ -16,11 +17,15 @@ module.exports = {
 
     async get(userId) {
         if (!userId) {
-            throw Error('Invalid id')
+            throw HttpNotFoundError('User not found');
         }
 
-        const data = await db.get(`users:${userId}`)
-        return JSON.parse(data)
+        try {
+            const data = await db.get(`users:${userId}`)
+            return JSON.parse(data)
+        } catch (e) {
+            throw new HttpNotFoundError('User not found');
+        }
     },
 
     async list() {
@@ -42,23 +47,13 @@ module.exports = {
 
     async update(id, user) {
         const original = await this.get(id);
-
-        if (!original) {
-            throw Error('Unregistered user id')
-        }
-
         user = merge(original, user);
         await db.put(`users:${user.id}`, JSON.stringify(user))
         return user;
     },
 
     async delete(userId) {
-        const original = this.get(userId);
-
-        if (!original) {
-            throw Error('Unregistered user id')
-        }
-
+        await this.get(userId);
         await db.del(`users:${userId}`);
     }
 }

@@ -1,16 +1,16 @@
 const db = require('../services/db.js')
 const {v4: uuid} = require('uuid')
 const microtime = require('microtime')
+const {HttpBadRequestError} = require('../errors')
 
 module.exports = {
     async create(channelId, { author, content }) {
-        console.log(channelId);
         if (!channelId) {
-            throw Error('Invalid channel')
+            throw HttpBadRequestError("Missing 'channelId' property");
         }
 
         if (!author || !content) {
-            throw Error('Invalid message')
+            throw HttpBadRequestError("Missing 'author' or 'content' property");
         }
 
         const id = uuid();
