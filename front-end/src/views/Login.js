@@ -12,6 +12,18 @@ import Grid from "@material-ui/core/Grid";
 // Local
 import Context from "../Context";
 import { useHistory } from "react-router-dom";
+import iconMessages from "../icons/messages.png";
+import iconLogin from "../icons/papano.png";
+import iconScreen from "../icons/screenNoel.png";
+import iconXmAs from "../icons/christmas.png";
+import {ReactComponent as ChannelIcon} from '../icons/channel.svg';
+
+import { relative } from "path";
+
+console.log(iconMessages);
+console.log(iconLogin);
+console.log(iconScreen);
+console.log(iconXmAs);
 
 const base64URLEncode = (str) => {
   return str
@@ -28,7 +40,8 @@ const sha256 = (buffer) => {
 const useStyles = (theme) => ({
   root: {
     flex: "1 1 auto",
-    background: theme.palette.background.default,
+    //background: theme.palette.background.default,
+    backgroundImage : 'url('+iconScreen+')',
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -49,9 +62,21 @@ const useStyles = (theme) => ({
     textAlign: "center",
   },
   icon: {
-    width: "30%",
-    fill: "#fff",
+    width: '30%',
+    fill: '#fff',
   },
+  icon2: {
+    width: '80%',
+    fill: '#fff',
+  },
+  bot: {
+    textAlign: "center",
+    position : 'relative',
+    //right : '%',
+    paddingTop : '35%',
+    width: '80%',
+    fill: '#fff',
+  }
 });
 
 const Redirect = ({ config, codeVerifier }) => {
@@ -81,21 +106,75 @@ const Redirect = ({ config, codeVerifier }) => {
       >
         <Grid item xs>
           <div css={styles.card}>
-            <span> Welcome to our new website !! </span>
+            <img css={styles.icon} src={iconMessages} alt="Messages" />
           </div>
         </Grid>
         <Grid item xs>
           <div css={styles.card}>
-            <Link onClick={redirect} color="secondary">
-              Login with OpenID Connect and OAuth2
-            </Link>
+              <span> 
+                The place to talk and be 
+                <br></br>
+                with your loved ones at any times
+              </span>
           </div>
         </Grid>
         <Grid item xs>
           <div css={styles.card}></div>
         </Grid>
       </Grid>
+      
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        spacing={5}
+      >
+        <Grid item xs>
+          <div css={styles.card}>
+          <img css={styles.icon} src={iconLogin} alt="Login" />
+          </div>
+        </Grid>
+        <Grid item xs>
+          <div css={styles.card}>
+            <Link onClick={redirect} color="secondary">
+              Login with your Christmas spirit 
+              <br></br>
+              (OpenID Connect and OAuth2)
+            </Link>
+          </div>
+        </Grid>
+        <Grid item l>
+          <div css={styles.card}>
+          <img css={styles.bot} src={iconXmAs} alt="Xmas" />
+          </div>
+        </Grid>
+      </Grid>
+
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        spacing={5}
+      >
+        <Grid item xs>
+          <div css={styles.card}>
+          <ChannelIcon css={styles.icon2} />
+          </div>
+        </Grid>
+        <Grid item xs>
+          <div css={styles.card}>
+            <span>Create and use multiples channels !</span>
+          </div>
+        </Grid>
+        <Grid item xs>
+          <div css={styles.card}>
+          </div>
+        </Grid>
+      </Grid>
     </div>
+    
   );
 };
 

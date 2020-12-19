@@ -67,10 +67,8 @@ export default ({
             <Link css={styles.link} onClick={onClickLogout}>Logout</Link>
           </span>
         :
-          <span>New user
-          </span>
+          <span>Welcome to the new ChatApp ! We hope you will have an happy Christmas and enjoy the skin of the webpage</span>
       }
-      
     </header>
   );
 }
