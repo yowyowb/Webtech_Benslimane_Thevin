@@ -11,6 +11,8 @@ module.exports = {
         }
 
         channel.id = uuid()
+
+        channel.users = channel.owner ? [channel.owner] : null;
         await db.put(`channels:${channel.id}`, JSON.stringify(channel))
         return channel;
     },
@@ -43,6 +45,11 @@ module.exports = {
                 resolve(channels)
             })
         })
+    },
+
+    async listUserChannels(userId) {
+        const channels = await this.list();
+        return channels.filter(channel => channel.users === null || channel.users.includes(userId))
     },
 
     async update(id, channel) {
