@@ -3,11 +3,25 @@ const {merge} = require("mixme");
 const {v4: uuid} = require('uuid')
 const {HttpNotFoundError, HttpBadRequestError} = require('../errors')
 
+const queryFunction = (query, user) => {
+    for (const [key, value] of Object.entries(query)) {
+        if (user[key] !== value) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 module.exports = {
 
     async create(user) {
-        if (!user.username) { // TODO validation here si le temps
-            throw HttpBadRequestError("missing 'username' field");
+        if (!user.email) { // TODO validation here si le temps
+            throw new HttpBadRequestError("missing 'username' field");
+        }
+
+        if (!user.username) {
+            user.username = user.email;
         }
 
         user.id = uuid()
@@ -17,7 +31,7 @@ module.exports = {
 
     async get(userId) {
         if (!userId) {
-            throw HttpNotFoundError('User not found');
+            throw new HttpNotFoundError('User not found');
         }
 
         try {
@@ -55,5 +69,15 @@ module.exports = {
     async delete(userId) {
         await this.get(userId);
         await db.del(`users:${userId}`);
+    },
+
+    async findBy(query) {
+        const users = await this.list();
+        return users.find(user => queryFunction(query, user))
+    },
+
+    async exists(query) {
+        const users = await this.list();
+        return users.some(user => queryFunction(query, user))
     }
 }

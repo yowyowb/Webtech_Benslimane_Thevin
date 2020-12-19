@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { HttpError, errorHandler } = require('../errors');
+const { errorHandler } = require('../errors');
 
 router.use('/users', require('./users'));
 router.use('/channels', require('./channels'));
