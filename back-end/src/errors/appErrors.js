@@ -26,4 +26,10 @@ class HttpNotFoundError extends HttpError {
     }
 }
 
-module.exports = { AppError, HttpError, HttpBadRequestError, HttpNotFoundError }
+class HttpNotAuthenticatedError extends HttpError {
+    constructor(message) {
+        super(401, message);
+    }
+}
+
+module.exports = { AppError, HttpError, HttpBadRequestError, HttpNotFoundError, HttpNotAuthenticatedError }

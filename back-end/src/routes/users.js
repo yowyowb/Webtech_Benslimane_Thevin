@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { requestWrapper } = require('../errors')
+const { requestWrapper, HttpBadRequestError } = require('../errors')
 const Users = require('../models/users');
 
 router.get('/', requestWrapper(async (req, res) => {
@@ -8,7 +8,15 @@ router.get('/', requestWrapper(async (req, res) => {
     res.json(users);
 }))
 
+router.get('/me', (req, res) => {
+    res.json(req.user);
+})
+
 router.post('/', requestWrapper(async (req, res) => {
+    const userDTO = req.body;
+    if (await Users.exists({ email: userDTO.email })) {
+        throw new HttpBadRequestError(`user with email '${userDTO.email}' already exists`);
+    }
     const user = await Users.create(req.body)
     res.status(201).json(user)
 }))
