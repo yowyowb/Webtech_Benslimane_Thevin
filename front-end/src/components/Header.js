@@ -7,13 +7,15 @@ import { useTheme } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
-import Context from '../Context'
+import Context from '../Context';
+import Login from '../views/Login';
 
 const useStyles = (theme) => ({
   header: {
     padding: theme.spacing(1),
     backgroundColor: 'rgba(255,255,255,.3)',
     flexShrink: 0,
+    //textAlign: "right",
   },
   headerLogIn: {
     backgroundColor: 'red',
@@ -25,6 +27,10 @@ const useStyles = (theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'none !important',
     },
+  },
+  link: {
+    position : "absolute",
+    left : '92%',
   }
 })
 
@@ -53,17 +59,16 @@ export default ({
       >
         <MenuIcon />
       </IconButton>
-      Header
+      
       {
         oauth ?
-          <span>
-            {oauth.email}
-            <Link onClick={onClickLogout}>logout</Link>
+          <span >
+            {oauth.email}                          
+            <Link css={styles.link} onClick={onClickLogout}>Logout</Link>
           </span>
         :
-          <span>new user</span>
+          <span>Welcome to the new ChatApp ! We hope you will have an happy Christmas and enjoy the skin of the webpage</span>
       }
-      
     </header>
   );
 }
