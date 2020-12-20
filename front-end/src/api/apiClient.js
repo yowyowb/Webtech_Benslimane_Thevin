@@ -57,6 +57,11 @@ export function createApiClient(oauth = null) {
         async getChannel(channelId) {
             const { data: channel } = await apiClient.get(`/channels/${channelId}`);
             return channel;
+        },
+
+        async createChannel(name) {
+            const { data }  = await apiClient.post(`/channels`, { name })
+            return data;
         }
     }
 }
