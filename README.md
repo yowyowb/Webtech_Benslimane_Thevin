@@ -98,7 +98,7 @@ Application development
 * Channel membership and access   
   *Every request sent to the API server (back-end) contain the user access token in the HTTP header with its identity (email). Once the token is validated by the authentication middleware, the user ID is associated with the created channel (eg owner property). If the user does not yet exist in the database, he is created automatically.*
 * Ressource access control   
-  *place your comments*
+  *A user only gain access to the channel he created or to the channels he was invited to. The APIs return the appropriate channels. It also prevent unexpected access and intrusion attempts. The HTTP response return an appropriate HTTP response code and message.*
 * Invite users to channels   
   *A channel can have one to n members, the creator being the first member. It is possible to invite new members either after the creation of the channel.*
 * Message modification   
@@ -113,3 +113,6 @@ Application development
   *Unavailable*
 * Personal custom avatar   
   *Unavailable*
+  
+## Bonus 
+* *You can still write in Markdown in the messages*
