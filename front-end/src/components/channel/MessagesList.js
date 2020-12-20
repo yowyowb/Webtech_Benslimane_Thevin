@@ -1,4 +1,4 @@
-import {forwardRef, useImperativeHandle, useLayoutEffect, useRef} from 'react'
+import {forwardRef, useContext, useImperativeHandle, useLayoutEffect, useRef} from 'react'
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 // Layout
@@ -12,6 +12,7 @@ import html from 'rehype-stringify'
 import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
 import updateLocale from 'dayjs/plugin/updateLocale'
+import Context from "../../Context.js";
 dayjs.extend(calendar)
 dayjs.extend(updateLocale)
 dayjs.updateLocale('en', {
@@ -64,6 +65,7 @@ export default forwardRef(({
   useImperativeHandle(ref, () => ({
     scroll: scroll
   }));
+  const {currentUser} = useContext(Context)
   const rootEl = useRef(null)
   const scrollEl = useRef(null)
   const scroll = () => {

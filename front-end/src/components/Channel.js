@@ -9,6 +9,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 // Local
 import MessageForm from './channel/MessageForm'
 import MessagesList from './channel/MessagesList'
+import ChannelSettings from "./ChannelSettings.js";
 import Context from '../Context'
 import { useHistory, useParams } from 'react-router-dom'
 import {createApiClient} from "../api/apiClient.js";
@@ -35,8 +36,8 @@ const useStyles = (theme) => ({
 export default () => {
   const history = useHistory()
   const { id } = useParams()
-  const {channels, oauth} = useContext(Context)
-  const channel = channels.find( channel => channel.id === id)
+  const {channels, oauth, currentUser} = useContext(Context)
+  const channel = channels.find( channel => channel.id === id);
   if(!channel) {
     history.push('/oups')
     return <div/>
@@ -47,6 +48,7 @@ export default () => {
   const channelId = useRef()
   const [messages, setMessages] = useState([])
   const [scrollDown, setScrollDown] = useState(false)
+
   const addMessage = (message) => {
     fetchMessages()
   }
@@ -70,8 +72,14 @@ export default () => {
   const onClickScroll = () => {
     listRef.current.scroll()
   }
+
   return (
     <div css={styles.root}>
+      { currentUser.id === channel.owner &&
+      <ChannelSettings
+          channel={channel}
+      />
+      }
       <MessagesList
         channel={channel}
         messages={messages}

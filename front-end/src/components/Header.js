@@ -40,7 +40,7 @@ const useStyles = (theme) => ({
     },
     link: {
         position: "relative",
-        left: '82%',
+        left: '80%',
         //top : '5%',
     }
 })

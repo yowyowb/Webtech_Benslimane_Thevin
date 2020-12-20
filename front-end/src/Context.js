@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {useCookies} from 'react-cookie'
+import {createApiClient} from "./api/apiClient.js";
 
 const Context = React.createContext()
 
@@ -13,6 +14,8 @@ export const Provider = ({
     const [drawerVisible, setDrawerVisible] = useState(false)
     const [channels, setChannels] = useState([])
     const [currentChannel, setCurrentChannel] = useState(null)
+    const [currentUser, setCurrentUser] = useState(null)
+    const [users, setUsers] = useState([])
     return (
         <Context.Provider value={{
             oauth: oauth,
@@ -30,7 +33,7 @@ export const Provider = ({
                     setChannels([])
                     removeCookie('oauth')
                 }
-                setOauth(oauth)
+                setOauth(oauth);
             },
             channels: channels,
             drawerVisible: drawerVisible,
@@ -41,6 +44,10 @@ export const Provider = ({
                 const channel = channels.find(channel => channel.id === channelId)
                 setCurrentChannel(channel)
             },
+            currentUser: currentUser,
+            setCurrentUser: setCurrentUser,
+            users: users,
+            setUsers: setUsers,
         }}>{children}</Context.Provider>
     )
 }

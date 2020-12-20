@@ -17,6 +17,9 @@ const styles = {
   channel: {
     padding: '.3rem .5rem',
     whiteSpace: 'nowrap',
+  },
+  link:{
+    color: "#FFF",
   }
 }
 
@@ -38,7 +41,6 @@ export default () => {
   }
 
   useEffect( () => {
-    
     fetchChannels()
   }, [oauth, setChannels])
   return (
@@ -48,8 +50,9 @@ export default () => {
       </li>
       { channels.map( (channel, i) => (
         <li key={i} css={styles.channel}>
-          
+
           <Link
+            style={styles.link}
             href={`/channels/${channel.id}`}
             onClick={ (e) => {
               e.preventDefault()

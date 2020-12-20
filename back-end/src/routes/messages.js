@@ -22,7 +22,6 @@ router.post('/', requestWrapper(async (req, res) => {
     const channelId = req.params.id;
     const channel = await Channels.get(channelId);
 
-    console.log('oui');
     if (!channel.users.includes(req.user.id)) {
         throw new HttpUnAuthorizedError('You are not member of this channel');
     }

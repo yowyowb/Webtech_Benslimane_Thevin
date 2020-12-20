@@ -37,6 +37,26 @@ export function createApiClient(oauth = null) {
         async createChannel(name) {
             const { data }  = await apiClient.post(`/channels`, { name })
             return data;
+        },
+
+        async getCurrentUser() {
+            const { data: user } = await apiClient.get('/users/me');
+            return user;
+        },
+
+        async addUserToChannel(channelId, userId) {
+            const { data } = await apiClient.post(`/channels/${channelId}/add/${userId}`);
+            return data;
+        },
+
+        async removeUserFromChannel(channelId, userId) {
+            const { data } = await apiClient.post(`/channels/${channelId}/remove/${userId}`);
+            return data;
+        },
+
+        async getChannel(channelId) {
+            const { data: channel } = await apiClient.get(`/channels/${channelId}`);
+            return channel;
         }
     }
 }

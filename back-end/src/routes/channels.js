@@ -33,6 +33,23 @@ router.post('/:id/add/:userId', requestWrapper(async (req, res) => {
     res.json(channel)
 }))
 
+router.post('/:id/remove/:userId', requestWrapper(async (req, res) => {
+    const channelId = req.params.id;
+    const userId = req.params.userId;
+    const channel = await Channels.get(channelId);
+
+    if (channel.owner !== req.user.id) {
+        throw new HttpUnAuthorizedError(`Your are not the owner of the channel ${channelId}`)
+    }
+
+    if (channel.users.includes(userId)) {
+        channel.users = channel.users.filter(user => user !== userId);
+        await Channels.update(channel.id, channel);
+    }
+
+    res.json(channel)
+}))
+
 router.post('/:id/leave', requestWrapper(async (req, res) => {
     const channelId = req.params.id;
     let channel = await Channels.get(channelId);
@@ -63,6 +80,17 @@ router.get('/:id/users', requestWrapper(async (req, res) => {
     const users = await Users.findUsers(channel.users);
     res.json(users)
 }))
+
+router.get('/:id', requestWrapper(async (req, res) => {
+    const channel = await Channels.get(req.params.id)
+
+    if (!channel.users.includes(req.user.id)) {
+        throw new HttpUnAuthorizedError('You are not member of this channel');
+    }
+
+    res.json(channel)
+}))
+
 
 router.put('/:id', requestWrapper(async (req, res) => {
     const channelId = req.params.id;
