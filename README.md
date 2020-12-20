@@ -1,9 +1,18 @@
 
 # Chat application - final project
 
-*Welcome to our Webtech project Applicartion
-It is an Application in React and Express
-It is about a chat Application*
+## Introcuction 
+The project creates a Chat application similar to Discord, WhatApps or Keybase with a minimal set of features. The user can securely create channels, invite friends and post messages in a secure manner. By the end, the user will be able:
+
+To authenticate itself using an external provider with Oauth.
+Navigate through his channels and the messages associated with the current channel.
+Share the channel access with other users.
+Access the channel to which he was invited.
+Send new messages.
+Remove his messages.
+Use the user Gravatar if any or provide a default randomly generated Gravatar.
+Modify his settings.
+Trust the Chat application because it is secured and the resource access is verified.
 
 ## Usage
 
@@ -65,6 +74,18 @@ It is about a chat Application*
   # Start the front-end
   yarn start
   ```
+  
+* Login thanks to OAuth
+
+* Create a new channel(s)
+
+* Send Messages to this/theses channel(s)
+
+* To see each fonctionnality, you have to connect with an other account
+
+* Invite other people to your channel
+
+* Refresh if you cannot see when another users added you
 
 ## Authors
 
