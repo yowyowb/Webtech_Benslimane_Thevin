@@ -4,51 +4,52 @@ import {useContext, useState} from "react";
 import Context from "../Context.js";
 import {createApiClient} from "../api/apiClient.js";
 
-export default ({channel}) => {
+export default ({channel, refreshChannel}) => {
     const {oauth, currentUser} = useContext(Context);
     const apiClient = createApiClient(oauth);
-    const [users, setUsers] = useState([]);
+    const [appUsers, setAppUsers] = useState([]);
     const [fetched, setFetched] = useState(false);
     const fetchUsers = async () => {
         const users = await apiClient.getUsers();
-        updateUsers(channel, users);
+        setAppUsers(users);
         setFetched(true);
     }
 
     const inviteUser = async (userId, channelId) => {
-        const channel = await apiClient.addUserToChannel(channelId, userId);
-        updateUsers(channel, users);
+        await apiClient.addUserToChannel(channelId, userId);
+        refreshChannel();
     }
 
     const removeUser = async (userId, channelId) => {
-        const channel = await apiClient.removeUserFromChannel(channelId, userId);
-        updateUsers(channel, users);
+        await apiClient.removeUserFromChannel(channelId, userId);
+        refreshChannel();
     }
 
-    const updateUsers = (channel, users) => {
-        users = users.filter(user => user.id !== currentUser.id)
-        users = users.map(user => {
-            const isMember = channel.users.includes(user.id);
-            const action = isMember ? () => removeUser(user.id, channel.id) : () => inviteUser(user.id, channel.id);
-            const actionText = isMember ? 'remove' : 'add';
-            return {
-                ...user,
-                isMember,
-                action,
-                actionText,
-            };
-        })
-        setUsers(users);
+    const formatUsers = () => {
+        return appUsers
+            .filter(user => user.id !== currentUser.id)
+            .map(user => {
+                const isMember = channel.users.includes(user.id);
+                const action = isMember ? () => removeUser(user.id, channel.id) : () => inviteUser(user.id, channel.id);
+                const actionText = isMember ? 'remove' : 'add';
+                return {
+                    ...user,
+                    isMember,
+                    action,
+                    actionText,
+                };
+            })
     }
 
     if (!fetched) {
         fetchUsers();
     }
+
     return (
         <div>
             Channel Setting
             <ul>
-                {users.map(user => (
+                {formatUsers().map(user => (
                     <li key={user.id}>
                         <p>
                             <span>{user.username}</span>
