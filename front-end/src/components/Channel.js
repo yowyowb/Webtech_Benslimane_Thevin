@@ -7,8 +7,8 @@ import { useTheme } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 // Local
-import Form from './channel/Form'
-import List from './channel/List'
+import MessageForm from './channel/MessageForm'
+import MessagesList from './channel/MessagesList'
 import Context from '../Context'
 import { useHistory, useParams } from 'react-router-dom'
 import {createApiClient} from "../api/apiClient.js";
@@ -72,13 +72,13 @@ export default () => {
   }
   return (
     <div css={styles.root}>
-      <List
+      <MessagesList
         channel={channel}
         messages={messages}
         onScrollDown={onScrollDown}
         ref={listRef}
       />
-      <Form addMessage={addMessage} channel={channel} />
+      <MessageForm addMessage={addMessage} channel={channel} />
       <Fab
         color="primary"
         aria-label="Latest messages"
