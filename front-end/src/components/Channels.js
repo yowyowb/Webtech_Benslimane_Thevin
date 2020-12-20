@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
@@ -6,15 +6,16 @@ import { jsx } from '@emotion/core'
 import Link from '@material-ui/core/Link'
 // Local
 import Context from '../Context'
-import {useHistory} from 'react-router-dom'
+import {useHistory, useParams} from 'react-router-dom'
 import {createApiClient} from "../api/apiClient.js";
+import NewChannel from './NewChannel.js'
 
 const styles = {
-  // root: {
-  //   minWidth: '200px',
-  // },
+  root: {
+    minWidth: '300px',
+  },
   channel: {
-    padding: '.2rem .5rem',
+    padding: '.3rem .5rem',
     whiteSpace: 'nowrap',
   }
 }
@@ -26,21 +27,28 @@ export default () => {
   } = useContext(Context)
   const history = useHistory();
   const apiClient = createApiClient(oauth);
-  useEffect( () => {
-    const fetch = async () => {
-      try{
-        const channels = await apiClient.getChannels();
-        setChannels(channels)
-      }catch(err){
-        console.error(err)
-      }
+
+  const fetchChannels = async () => {
+    try{
+      const channels = await apiClient.getChannels();
+      setChannels(channels)
+    }catch(err){
+      console.error(err)
     }
-    fetch()
+  }
+
+  useEffect( () => {
+    
+    fetchChannels()
   }, [oauth, setChannels])
   return (
     <ul style={styles.root}>
+      <li>
+      <NewChannel refresh={fetchChannels}/>
+      </li>
       { channels.map( (channel, i) => (
         <li key={i} css={styles.channel}>
+          
           <Link
             href={`/channels/${channel.id}`}
             onClick={ (e) => {
