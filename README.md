@@ -1,7 +1,9 @@
 
 # Chat application - final project
 
-*presentation, introduction, ...*
+*Welcome to our Webtech project Applicartion
+It is an Application in React and Express
+It is about a chat Application*
 
 ## Usage
 
@@ -30,7 +32,7 @@
   ```bash
   cp -rp ./dex-config/config.yaml ./dex-config/config-private.yaml
   ```
-* Register your GitHub application, get the clientID and clientSecret from GitHub and report them to your Dex configuration. Modify the provided `./dex-config/config-private.yaml` configuration to look like:
+* Register your GitHub application, get the clientID and clientSecret from GitHub (GitHub/Setting/Developper Settings/OAuth Apps) and report them to your Dex configuration. Modify the provided `./dex-config/config-private.yaml` configuration to look like:
   ```yaml
   - type: github
     id: github
@@ -77,41 +79,37 @@ victor.thevin@edu.ece.fr    Student at [ECE Paris](https://www.ece.fr)
 Project management
 
 * Naming convention   
-  *place your comments*
+
 * Project structure   
-  *place your comments*
+  *We organize our files by use (eg front-end/src/components/channel/MessageForm.js).*
 * Code quality   
-  *place your comments*
+  *The code is indent and organized, and we did our be to did it understable.*
 * Design, UX   
-  *place your comments*
+  *It is very simple to use and to understand. Because it is (or close to be) Christmas, we chose to create a Winter Design, for example Santa will be next to the login link.*
 * Git and DevOps   
-  *place your comments*
+  *We used Git and its tools to do this project, we used many commits and we used the pull request tool. We try to organize our branches by folder (feature).*
 
 Application development
 
 * Welcome screens   
-  *place your comments*
+  *As I said we chose to create a Christmas Design with Christmas spirit, enjoy !*
 * New channel creation   
-  *place your comments*
+  *Available in the channels list, you can create new channels thanks to a little form, by giving a channel name.*
 * Channel membership and access   
-  *place your comments*
+  *Every request sent to the API server (back-end) contain the user access token in the HTTP header with its identity (email). Once the token is validated by the authentication middleware, the user ID is associated with the created channel (eg owner property). If the user does not yet exist in the database, he is created automatically.*
 * Ressource access control   
   *place your comments*
 * Invite users to channels   
-  *place your comments*
+  *A channel can have one to n members, the creator being the first member. It is possible to invite new members either after the creation of the channel.*
 * Message modification   
-  *place your comments*
+  *Unavailable*
 * Message removal   
-  *place your comments*
+  *Available*
 * Account settings   
-  *place your comments*
+  *Unavailable*
 * Gravatar integration   
-  *place your comments*
+  *Available*
 * Avatar selection   
-  *place your comments*
+  *Unavailable*
 * Personal custom avatar   
-  *place your comments*
-
-## Bonus
-
-*place your comments*
+  *Unavailable*
