@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {requestWrapper, HttpUnAuthorizedError, HttpBadRequestError} = require('../errors')
 const Channels = require('../models/channels');
+const Users = require('../models/users');
 
 router.get('/', requestWrapper(async (req, res) => {
     const channels = await Channels.listUserChannels(req.user.id);
@@ -52,14 +53,15 @@ router.post('/:id/leave', requestWrapper(async (req, res) => {
     res.json(channel);
 }))
 
-router.get('/:id', requestWrapper(async (req, res) => {
+router.get('/:id/users', requestWrapper(async (req, res) => {
     const channel = await Channels.get(req.params.id)
 
     if (!channel.users.includes(req.user.id)) {
         throw new HttpUnAuthorizedError('You are not member of this channel');
     }
 
-    res.json(channel)
+    const users = await Users.findUsers(channel.users);
+    res.json(users)
 }))
 
 router.put('/:id', requestWrapper(async (req, res) => {

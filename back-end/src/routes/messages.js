@@ -3,6 +3,7 @@ const router = express.Router({ mergeParams: true });
 const { requestWrapper, HttpUnAuthorizedError } = require('../errors')
 const Messages = require('../models/messages');
 const Channels = require('../models/channels')
+const { serializeMessages } = require('../services/serializer');
 
 router.get('/', requestWrapper(async (req, res) => {
     const channelId = req.params.id;
@@ -13,7 +14,8 @@ router.get('/', requestWrapper(async (req, res) => {
     }
 
     const messages = await Messages.list(channelId);
-    res.json(messages);
+
+    res.json(await serializeMessages(messages));
 }))
 
 router.post('/', requestWrapper(async (req, res) => {
