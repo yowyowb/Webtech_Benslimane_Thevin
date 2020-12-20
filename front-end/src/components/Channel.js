@@ -37,7 +37,7 @@ export default () => {
   const history = useHistory()
   const { id } = useParams()
   const {channels, oauth, currentUser} = useContext(Context)
-  const [channel, setChannel] = useState(channels.find( channel => channel.id === id))
+  const channel = channels.find( channel => channel.id === id);
   if(!channel) {
     history.push('/oups')
     return <div/>
@@ -72,17 +72,12 @@ export default () => {
   const onClickScroll = () => {
     listRef.current.scroll()
   }
-  const updateChannel = (channel) => {
-    console.log(channel);
-    setChannel(channel)
-  }
 
   return (
     <div css={styles.root}>
       { currentUser.id === channel.owner &&
       <ChannelSettings
           channel={channel}
-          setChannel={updateChannel}
       />
       }
       <MessagesList
