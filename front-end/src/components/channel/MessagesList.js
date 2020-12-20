@@ -13,6 +13,7 @@ import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
 import updateLocale from 'dayjs/plugin/updateLocale'
 import Context from "../../Context.js";
+import {createApiClient} from "../../api/apiClient.js";
 dayjs.extend(calendar)
 dayjs.extend(updateLocale)
 dayjs.updateLocale('en', {
@@ -59,6 +60,7 @@ export default forwardRef(({
   channel,
   messages,
   onScrollDown,
+    refreshMessages,
 }, ref) => {
   const styles = useStyles(useTheme())
   // Expose the `scroll` action
@@ -67,7 +69,8 @@ export default forwardRef(({
   }));
   const rootEl = useRef(null)
   const scrollEl = useRef(null)
-  const {currentUser} = useContext(Context)
+  const {currentUser, oauth} = useContext(Context)
+  const apiClient = createApiClient(oauth);
   const scroll = () => {
     scrollEl.current.scrollIntoView()
   }
@@ -88,6 +91,12 @@ export default forwardRef(({
     rootNode.addEventListener('scroll', handleScroll)
     return () => rootNode.removeEventListener('scroll', handleScroll)
   })
+
+  const removeMessage = message => async () => {
+      await apiClient.deleteMessage(message);
+      refreshMessages();
+  }
+
   return (
     <div css={styles.root} ref={rootEl}>
       <h1>Messages for {channel.name}</h1>
@@ -105,10 +114,7 @@ export default forwardRef(({
                   {' - '}
                   <span>{dayjs(message.creation).format('DD/MM/YYYY - HH:mm')}</span>
 
-                  {message.author.id === currentUser.id
-                    ? <button>X</button>
-                    : <span></span>
-                  }
+                  {message.author.id === currentUser.id && <button onClick={removeMessage(message)}>X</button>}
 
                 </p>
                 <div dangerouslySetInnerHTML={{__html: content}}>

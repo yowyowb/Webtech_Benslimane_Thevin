@@ -62,6 +62,10 @@ export function createApiClient(oauth = null) {
         async createChannel(name) {
             const { data }  = await apiClient.post(`/channels`, { name })
             return data;
+        },
+
+        async deleteMessage(message) {
+            await apiClient.delete(`/channels/${message.channelId}/messages/${message.creation}`);
         }
     }
 }

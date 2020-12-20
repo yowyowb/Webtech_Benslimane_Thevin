@@ -84,6 +84,7 @@ export default () => {
         channel={channel}
         messages={messages}
         onScrollDown={onScrollDown}
+        refreshMessages={fetchMessages}
         ref={listRef}
       />
       <MessageForm addMessage={addMessage} channel={channel} />
