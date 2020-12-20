@@ -39,8 +39,9 @@ const useStyles = (theme) => ({
         },
     },
     link: {
-        position: "absolute",
-        left: '92%',
+        position: "relative",
+        left: '82%',
+        //top : '5%',
     }
 })
 
@@ -94,20 +95,18 @@ export default ({
             </IconButton>
             {
                 oauth ?
-                    <span>
-          {oauth.email}
-                        <img
-                            src={gravatar}
-                            Width="40"
-                            height="40"
-                            alt="Login"
-                        />
-        <Link onClick={onClickLogout}> logout < /Link>
-          < /span> :
-        <span> Welcome to the new ChatApp ! We hope you will have an happy Christmas and enjoy the skin of the webpage < /span>
+                <span>
+                    <img src={gravatar} width="40" height="40" alt="Login" />
+                    <span>&emsp;</span>
+                    {oauth.email}
+                    
+                        
+                    <Link  css={styles.link} onClick={onClickLogout}> Logout </Link>
+                </span> 
+                :
+                <span> Welcome to the new ChatApp ! We hope you will have an happy Christmas and enjoy the skin of the webpage </span>
     }
 
-    <
-        /header>
+    </header>
   );
 }
