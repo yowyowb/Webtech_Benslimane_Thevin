@@ -65,9 +65,9 @@ export default forwardRef(({
   useImperativeHandle(ref, () => ({
     scroll: scroll
   }));
-  const {currentUser} = useContext(Context)
   const rootEl = useRef(null)
   const scrollEl = useRef(null)
+  const {currentUser} = useContext(Context)
   const scroll = () => {
     scrollEl.current.scrollIntoView()
   }
@@ -104,6 +104,12 @@ export default forwardRef(({
                   <span>{message.author.username}</span>
                   {' - '}
                   <span>{dayjs(message.creation).format('DD/MM/YYYY - HH:mm')}</span>
+
+                  {message.author.id === currentUser.id
+                    ? <button>X</button>
+                    : <span></span>
+                  }
+
                 </p>
                 <div dangerouslySetInnerHTML={{__html: content}}>
                 </div>
