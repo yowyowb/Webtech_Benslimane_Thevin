@@ -10,7 +10,7 @@ module.exports = {
         if (err instanceof appErrors.HttpError) {
             res.status(err.code).json(err)
         } else {
-            res.status(500).json({ message: 'Unknown Server Error' });
+            res.status(500).json({ message: 'Unknown Server Error', error: err });
         }
     },
 }

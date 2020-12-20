@@ -79,5 +79,10 @@ module.exports = {
     async exists(query) {
         const users = await this.list();
         return users.some(user => queryFunction(query, user))
+    },
+
+    async findUsers(userIds = []) {
+        const users = await this.list();
+        return users.filter(user => userIds.includes(user.id));
     }
 }

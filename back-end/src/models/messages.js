@@ -1,6 +1,5 @@
 const db = require('../services/db.js')
 const {v4: uuid} = require('uuid')
-const microtime = require('microtime')
 const {HttpBadRequestError} = require('../errors')
 
 module.exports = {
@@ -14,7 +13,7 @@ module.exports = {
         }
 
         const id = uuid();
-        const creation = microtime.now()
+        const creation = new Date().getTime();
         const message = {
             id,
             author,

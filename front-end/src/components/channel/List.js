@@ -25,7 +25,7 @@ const useStyles = (theme) => ({
     position: 'relative',
     flex: '1 1 auto',
     'pre': {
-      
+
       overflowY: 'auto',
     },
     '& ul': {
@@ -99,9 +99,9 @@ export default forwardRef(({
             return (
               <li key={i} css={styles.message}>
                 <p>
-                  <span>{message.author}</span>
+                  <span>{message.author.username}</span>
                   {' - '}
-                  <span>{dayjs().calendar(message.creation)}</span>
+                  <span>{dayjs(message.creation).format('DD/MM/YYYY - HH:mm')}</span>
                 </p>
                 <div dangerouslySetInnerHTML={{__html: content}}>
                 </div>

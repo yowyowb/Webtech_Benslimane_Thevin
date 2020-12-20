@@ -7,6 +7,7 @@ import Link from '@material-ui/core/Link'
 // Local
 import Context from '../Context'
 import {useHistory} from 'react-router-dom'
+import {createApiClient} from "../api/apiClient.js";
 
 const styles = {
   // root: {
@@ -14,7 +15,7 @@ const styles = {
   // },
   channel: {
     padding: '.2rem .5rem',
-    whiteSpace: 'nowrap', 
+    whiteSpace: 'nowrap',
   }
 }
 
@@ -24,14 +25,11 @@ export default () => {
     channels, setChannels
   } = useContext(Context)
   const history = useHistory();
+  const apiClient = createApiClient(oauth);
   useEffect( () => {
     const fetch = async () => {
       try{
-        const {data: channels} = await axios.get('http://localhost:3001/channels', {
-          headers: {
-            'Authorization': `Bearer ${oauth.access_token}`
-          }
-        })
+        const channels = await apiClient.getChannels();
         setChannels(channels)
       }catch(err){
         console.error(err)

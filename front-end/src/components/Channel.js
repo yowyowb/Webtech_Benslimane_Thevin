@@ -11,6 +11,7 @@ import Form from './channel/Form'
 import List from './channel/List'
 import Context from '../Context'
 import { useHistory, useParams } from 'react-router-dom'
+import {createApiClient} from "../api/apiClient.js";
 
 const useStyles = (theme) => ({
   root: {
@@ -34,12 +35,13 @@ const useStyles = (theme) => ({
 export default () => {
   const history = useHistory()
   const { id } = useParams()
-  const {channels} = useContext(Context)
+  const {channels, oauth} = useContext(Context)
   const channel = channels.find( channel => channel.id === id)
   if(!channel) {
     history.push('/oups')
     return <div/>
   }
+  const apiClient = createApiClient(oauth);
   const styles = useStyles(useTheme())
   const listRef = useRef()
   const channelId = useRef()
@@ -48,14 +50,16 @@ export default () => {
   const addMessage = (message) => {
     fetchMessages()
   }
+
   const fetchMessages = async () => {
     setMessages([])
-    const {data: messages} = await axios.get(`http://localhost:3001/channels/${channel.id}/messages`)
+    const messages = await apiClient.getMessages(channel.id)
     setMessages(messages)
     if(listRef.current){
       listRef.current.scroll()
     }
   }
+
   if(channelId.current !== channel.id){
     fetchMessages()
     channelId.current = channel.id
