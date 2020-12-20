@@ -19,6 +19,7 @@ import iconXmAs from "../icons/christmas.png";
 import {ReactComponent as ChannelIcon} from '../icons/channel.svg';
 
 import { relative } from "path";
+import {createApiClient} from "../api/apiClient.js";
 
 console.log(iconMessages);
 console.log(iconLogin);
@@ -111,8 +112,8 @@ const Redirect = ({ config, codeVerifier }) => {
         </Grid>
         <Grid item xs>
           <div css={styles.card}>
-              <span> 
-                The place to talk and be 
+              <span>
+                The place to talk and be
                 <br></br>
                 with your loved ones at any times
               </span>
@@ -122,7 +123,7 @@ const Redirect = ({ config, codeVerifier }) => {
           <div css={styles.card}></div>
         </Grid>
       </Grid>
-      
+
       <Grid
         container
         direction="column"
@@ -138,7 +139,7 @@ const Redirect = ({ config, codeVerifier }) => {
         <Grid item xs>
           <div css={styles.card}>
             <Link onClick={redirect} color="secondary">
-              Login with your Christmas spirit 
+              Login with your Christmas spirit
               <br></br>
               (OpenID Connect and OAuth2)
             </Link>
@@ -174,7 +175,7 @@ const Redirect = ({ config, codeVerifier }) => {
         </Grid>
       </Grid>
     </div>
-    
+
   );
 };
 
@@ -248,8 +249,7 @@ export default ({ onUser }) => {
           );
           removeCookie("code_verifier");
           setOauth(data);
-          // window.location = '/'
-          history.push("/");
+          window.location = '/'
         } catch (err) {
           console.error(err);
         }

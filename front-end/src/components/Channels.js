@@ -38,7 +38,6 @@ export default () => {
   }
 
   useEffect( () => {
-    
     fetchChannels()
   }, [oauth, setChannels])
   return (
@@ -48,7 +47,7 @@ export default () => {
       </li>
       { channels.map( (channel, i) => (
         <li key={i} css={styles.channel}>
-          
+
           <Link
             href={`/channels/${channel.id}`}
             onClick={ (e) => {
