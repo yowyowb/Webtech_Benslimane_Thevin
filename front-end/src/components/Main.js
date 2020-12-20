@@ -25,7 +25,7 @@ const useStyles = (theme) => ({
     position: 'relative',
   },
   drawer: {
-    width: '200px',
+    width: '300px',
     display: 'none',
   },
   drawerVisible: {
