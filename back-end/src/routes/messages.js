@@ -33,4 +33,20 @@ router.post('/', requestWrapper(async (req, res) => {
     res.status(201).json(message)
 }))
 
+
+router.delete('/:creation', requestWrapper(async (req, res) => {
+    const channelId = req.params.id;
+    const creation = req.params.creation;
+    const message = await Messages.get(channelId, creation);
+
+    if (message.author !== req.user.id) {
+        throw new HttpUnAuthorizedError('You are not the author of this message');
+    }
+
+    await Messages.delete(message);
+
+    res.status(204).send();
+}))
+
+
 module.exports = router;

@@ -37,8 +37,7 @@ export default () => {
   const history = useHistory()
   const { id } = useParams()
   const {channels, oauth, currentUser} = useContext(Context)
-  const channel = channels.find( channel => channel.id === id);
-  if(!channel) {
+  if(!channels.find( channel => channel.id === id)) {
     history.push('/oups')
     return <div/>
   }
@@ -46,6 +45,7 @@ export default () => {
   const styles = useStyles(useTheme())
   const listRef = useRef()
   const channelId = useRef()
+  const [channel, setChannel] = useState(null);
   const [messages, setMessages] = useState([])
   const [scrollDown, setScrollDown] = useState(false)
 
@@ -53,18 +53,24 @@ export default () => {
     fetchMessages()
   }
 
+  const fetchChannel = async () => {
+    const channel = await apiClient.getChannel(id);
+    setChannel(channel);
+  }
+
   const fetchMessages = async () => {
     setMessages([])
-    const messages = await apiClient.getMessages(channel.id)
+    const messages = await apiClient.getMessages(id)
     setMessages(messages)
     if(listRef.current){
       listRef.current.scroll()
     }
   }
 
-  if(channelId.current !== channel.id){
+  if(channelId.current !== id){
+    fetchChannel();
     fetchMessages()
-    channelId.current = channel.id
+    channelId.current = id
   }
   const onScrollDown = (scrollDown) => {
     setScrollDown(scrollDown)
@@ -75,15 +81,17 @@ export default () => {
 
   return (
     <div css={styles.root}>
-      { currentUser.id === channel.owner &&
+      { channel && currentUser.id === channel.owner &&
       <ChannelSettings
           channel={channel}
+          refreshChannel={fetchChannel}
       />
       }
       <MessagesList
         channel={channel}
         messages={messages}
         onScrollDown={onScrollDown}
+        refreshMessages={fetchMessages}
         ref={listRef}
       />
       <MessageForm addMessage={addMessage} channel={channel} />
