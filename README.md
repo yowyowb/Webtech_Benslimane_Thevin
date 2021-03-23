@@ -1,7 +1,7 @@
 
 # Chat application - final project
 
-## Introcuction 
+## Introduction 
 The project creates a Chat application similar to Discord, WhatApps or Keybase with a minimal set of features. The user can securely create channels, invite friends and post messages in a secure manner. By the end, the user will be able:
 
 To authenticate itself using an external provider with Oauth.
